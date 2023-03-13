@@ -1,4 +1,5 @@
 <p>app login</p>
+<p>{{ auth.token }}</p>
 <form [formGroup]="loginForm" (ngSubmit)="login()">
   <input formControlName="username" />
   <input formControlName="password" />

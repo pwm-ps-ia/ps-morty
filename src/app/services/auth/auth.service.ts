@@ -18,6 +18,20 @@ export class AuthService {
         username: email,
         password: password,
       })
-      .pipe(tap((response) => (this.token = response.token)));
+      .pipe(
+        tap((response) => {
+          this.setSession(response.token);
+        })
+      );
+  }
+
+  setSession(token: string) {
+    this.token = token;
+    localStorage.setItem('token', token);
+  }
+
+  clearSession() {
+    this.token = null;
+    localStorage.removeItem('token');
   }
 }

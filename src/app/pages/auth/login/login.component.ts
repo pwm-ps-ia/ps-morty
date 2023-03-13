@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -15,12 +16,16 @@ export class LoginComponent {
 
   pepe = 'pepe';
 
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService, private router: Router) {}
 
   login() {
-    this.auth.login(
-      this.loginForm.value.username || '',
-      this.loginForm.value.password || ''
-    );
+    this.auth
+      .login(
+        this.loginForm.value.username || '',
+        this.loginForm.value.password || ''
+      )
+      .subscribe((x) => {
+        this.router.navigateByUrl('/');
+      });
   }
 }
