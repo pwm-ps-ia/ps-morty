@@ -10,8 +10,6 @@ import { BareaerTokenAuth } from 'src/app/types/db/auth';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  token: string | null = null;
-
   login(email: string, password: string) {
     return this.http
       .post<BareaerTokenAuth>(ApiConfig.url + '/auth/bareaer-token/', {
@@ -26,12 +24,10 @@ export class AuthService {
   }
 
   setSession(token: string) {
-    this.token = token;
     localStorage.setItem('token', token);
   }
 
   clearSession() {
-    this.token = null;
     localStorage.removeItem('token');
   }
 }
